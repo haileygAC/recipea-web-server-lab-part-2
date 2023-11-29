@@ -31,11 +31,33 @@
   {
     "name": "Fried Chicken",
     "cookingMethod": "deep fry",
-    "ingredients": ["chicken", "flour", "salt", "pepper", "garlic", "oil"]
+    "ingredients": [
+      "chicken",
+      "flour",
+      "salt",
+      "pepper",
+      "garlic",
+      "oil"
+    ]
   },
   {
     "name": "Baked Chicken",
     "cookingMethod": "oven bake",
-    "ingredients": ["chicken", "salt", "pepper", "garlic", "oil"]
+    "ingredients": [
+      "chicken",
+      "salt",
+      "pepper",
+      "garlic",
+      "oil"
+    ]
+  },
+  {
+    "name": "Cranberry Sauce",
+    "cookingMethod": "stove-top boil",
+    "ingredients": [
+      "cranberries",
+      "sugar",
+      "water"
+    ]
   }
 ]
