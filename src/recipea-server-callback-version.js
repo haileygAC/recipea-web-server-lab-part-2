@@ -11,24 +11,33 @@ app.listen(3000, () => {
 
 
 
-const saveNote = async (newNote) => {
+const saveRecipe = async (newRecipe) => {
   const data = await fs.readFile("../data/recipea-data.json", "utf8");
-  const notes = [...JSON.parse(data), newNote];
-  const jsonVersion = JSON.stringify(notes, null, 2);
-  await fs.writeFile("../data/recipea-data.json", jsonVersion, "utf8");
+  const recipes = [...JSON.parse(data), newRecipe];
+  const jsonRecipe = JSON.stringify(recipes, null, 2);
+  await fs.writeFile("../data/recipea-data.json", jsonRecipe, "utf8");
 };
 
 const deleteRecipe = async (id) => {
   const data = await fs.readFile("../data/recipea-data.json", "utf8");
-  const notes = JSON.parse(data).filter((note, i) => i !== id);
-  const jsonVersion = JSON.stringify(notes, null, 2);
-  await fs.writeFile("../data/recipea-data.json", jsonVersion, "utf8");
+  const recipes = JSON.parse(data).filter((recipe, i) => i !== id);
+  const jsonRecipe = JSON.stringify(recipes, null, 2);
+  await fs.writeFile("../data/recipea-data.json", jsonRecipe, "utf8");
 };
 
-app.get("/find-recipes", (req, res) => {
-  fs.readFile("../data/recipea-data.json", "utf8", (err, data) => {
-    res.send(data);
-  });
+const updateRecipe = async (id, updatedRecipe) => {
+  const data = await fs.readFile("../data/recipea-data.json", "utf8")
+  const recipes = JSON.parse(data).map((recipe, i) => {
+    return i === id ? updatedRecipe : recipe;
+})
+
+const jsonRecipe = JSON.stringify(recipes, null, 2);
+await fs.writeFile("../data/recipea-data.json", jsonRecipe, "utf8");
+};
+
+app.get("/find-recipes", async (req, res) => {
+  const recipes = await fs.readFile("../data/recipea-data.json", "utf8");
+  res.send(recipes);
 });
 
 app.get("/find-recipe/:id", async (req, res) => {
@@ -41,12 +50,24 @@ app.get("/find-recipe/:id", async (req, res) => {
   });
 
 app.get("/create-recipe", async (req, res) => {
-  await saveNote({name: req.body.name, cookingMethod: req.body.cookingMethod, ingredients: req.body.ingredients});
+  await saveRecipe({name: req.body.name, cookingMethod: req.body.cookingMethod, ingredients: req.body.ingredients});
   res.send("Recipe successfully added to the file!");
 })
 
-app.get("/trash-recipe/:id", async (req, res) => {
-  await deleteRecipe(Number(req.params.id));
-  res.send("Successfully deleted note.");
+app.get("/update-recipe/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const updatedRecipe = {
+    name: req.body.name,
+    cookingMethod: req.body.cookingMethod,
+    ingredients: req.body.ingredients
+  };
+
+  await updateRecipe(Number(req.params.id), updatedRecipe);
+  res.send(`Recipe ${id} has been updated!`);
 });
 
+app.get("/trash-recipe/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  await deleteRecipe(Number(req.params.id));
+  res.send(`Successfully deleted Recipe ${id}.`);
+});

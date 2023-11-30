@@ -1,43 +1,12 @@
 [
   {
-    "name": "Spaghetti with White Sauce",
-    "cookingMethod": "stove-top boil",
-    "ingredients": [
-      "spaghetti",
-      "butter",
-      "flour",
-      "milk",
-      "salt",
-      "pepper",
-      "garlic",
-      "parmesan cheese"
-    ]
-  },
-  {
     "name": "Spaghetti with Red Sauce",
     "cookingMethod": "stove-top boil",
     "ingredients": [
       "spaghetti",
       "tomato sauce",
-      "tomato paste",
-      "ground beef",
-      "salt",
-      "pepper",
-      "garlic",
-      "onion",
-      "parmesan cheese"
-    ]
-  },
-  {
-    "name": "Fried Chicken",
-    "cookingMethod": "deep fry",
-    "ingredients": [
-      "chicken",
-      "flour",
-      "salt",
-      "pepper",
-      "garlic",
-      "oil"
+      "onions",
+      "garlic"
     ]
   },
   {
@@ -58,6 +27,15 @@
       "cranberries",
       "sugar",
       "water"
+    ]
+  },
+  {
+    "name": "PB & Banana Sandwich",
+    "cookingMethod": "sandwich",
+    "ingredients": [
+      "peanut butter",
+      "sliced bananas",
+      "bread"
     ]
   }
 ]
